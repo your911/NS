@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+// Encryption Function (XOR-based AES Demo)
+string encrypt(string text, string key)
+{
+    string result = "";
+
+    for (int i = 0; i < text.size(); i++)
+    {
+        result += text[i] ^ key[i % key.size()];
+    }
+
+    return result;
+}
+
+// Decryption Function
+string decrypt(string text, string key)
+{
+    // XOR reverses itself
+    return encrypt(text, key);
+}
+
+// Main Function
+int main()
+{
+    string text, key;
+
+    cout << "Enter Text : ";
+    getline(cin, text);
+
+    cout << "Enter Key  : ";
+    getline(cin, key);
+
+    // Encrypt the Text
+    string cipher = encrypt(text, key);
+
+    cout << "\nOriginal Text : " << text << endl;
+    cout << "Key           : " << key << endl;
+
+    // Display Encrypted Text in Hexadecimal
+    cout << "Encrypted (Hex): ";
+
+    for (char c : cipher)
+        printf("%02x ", (unsigned char)c);
+
+    // Decrypt the Text
+    string original = decrypt(cipher, key);
+
+    cout << "\nDecrypted Text : " << original << endl;
+
+    return 0;
+}
