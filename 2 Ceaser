@@ -1,0 +1,45 @@
+// Caesar Cipher Program
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+// Encrypt function
+string encrypt(string text, int shift) {
+    string result = "";
+
+    for (char c : text) {
+        if (isupper(c))
+            result += char((c - 'A' + shift) % 26 + 'A');
+
+        else if (islower(c))
+            result += char((c - 'a' + shift) % 26 + 'a');
+
+        else
+            result += c; // keep spaces/symbols
+    }
+
+    return result;
+}
+
+// Decrypt function
+string decrypt(string text, int shift) {
+    return encrypt(text, 26 - (shift % 26));
+}
+
+int main() {
+
+    string text = "Hello World";
+    int shift = 3;
+
+    string encrypted = encrypt(text, shift);
+    string decrypted = decrypt(encrypted, shift);
+
+    cout << "Original: " << text << endl;
+    cout << "Shift: " << shift << endl;
+    cout << "Encrypted: " << encrypted << endl;
+    cout << "Decrypted: " << decrypted << endl;
+
+    return 0;
+}
