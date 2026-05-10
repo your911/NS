@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+string encrypt(string text, string key) {
+
+    string result = "";
+
+    for (char c : text) {
+
+        if (isupper(c))
+            result += key[c - 'A'];
+
+        else if (islower(c))
+            result += tolower(key[c - 'a']);
+
+        else
+            result += c; // keep spaces/symbols
+    }
+
+    return result;
+}
+
+int main() {
+
+    string text = "HELLO WORLD";
+    string key = "QWERTYUIOPASDFGHJKLZXCVBNM";
+
+    cout << "Original Text : " << text << endl;
+    cout << "Key           : " << key << endl;
+    cout << "Encrypted     : " << encrypt(text, key) << endl;
+
+    return 0;
+}
